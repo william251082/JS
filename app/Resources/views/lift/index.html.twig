@@ -70,8 +70,12 @@
         $(document).ready(function () {
             var $table = $('.js-rep-log-table');
 
-            $table.find('.js-delete-rep-log').on('click', function () {
+            // listener function
+            $table.find('.js-delete-rep-log').on('click', function (e) {
+                e.preventDefault();
                 console.log('todo delete');
+
+                return false;
             });
 
             $table.find('tbody tr').on('click', function () {
