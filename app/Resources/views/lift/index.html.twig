@@ -83,6 +83,13 @@
                     'click',
                     this.handleRowClick
                 );
+
+                var newThis = {cat: 'meow', dog: 'woof'};
+                this.whatIsThis.call(newThis, 'hello');
+            },
+
+            whatIsThis: function (greeting) {
+                console.log(this, greeting);
             },
 
             handleRepLogDelete: function (e) {
@@ -101,7 +108,7 @@
                     method: 'DELETE',
                     success: function () {
                         $row.fadeOut('normal', function () {
-                            row.remove();
+                            $(this).remove();
                             RepLogApp.updateTotalWeightLifted();
                         });
                     }
@@ -121,8 +128,9 @@
                 });
 
                 this.$wrapper.find('js-total-weight').html(totalWeight);
-            }
+            },
         };
+
 
         $(document).ready(function () {
             var $table = $('.js-rep-log-table');
