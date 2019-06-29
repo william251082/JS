@@ -64,15 +64,16 @@
             console.log('submitting');
             var $form = $(e.currentTarget);
             $.ajax({
-                url: $form.attr('action'),
+                url: $form.data('url'),
                 method: 'POST',
                 data: $form.serialize(),
                 success: function (data) {
-                    $form.closest('.js-new-rep-log-form-wrapper')
-                        .html(data)
+                  // todo
+                    console.log('succes!');
                 },
                 error: function (jqXHR) {
-                    $form.closest('.js-new-rep-log-form-wrapper')
+                   // todo
+                    console.log('error :(')
                 }
             });
         },
