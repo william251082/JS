@@ -5,6 +5,17 @@
         initialize: function ($wrapper) {
             this.$wrapper = $wrapper;
             this.helper = new Helper($wrapper);
+            // var helper2 = new Helper($('.footer'));
+            // console.log(
+            //     this.helper.calculateTotalWeight(),
+            //     helper2.calculateTotalWeight()
+            // );
+
+            // console.log(
+            //     'foo'.__proto__,
+            //     [].__proto__,
+            //     (new Date()).__proto__
+            //     );
 
             this.$wrapper.find('.js-delete-rep-log').on(
                 'click',
@@ -16,8 +27,15 @@
                 this.handleRowClick.bind(this)
             );
 
-            console.log(this.helper, Object.keys(this.helper));
-            console.log(Helper, Object.keys(Helper));
+            // console.log(this.helper, Object.keys(this.helper));
+            // console.log(Helper, Object.keys(Helper));
+            // console.log(this.helper.calculateTotalWeight());
+
+            var playObject = {
+                lift: 'stuff'
+            };
+            playObject.__proto__.cat = 'meow';
+            // console.log(playObject.lift, playObject.cat);
         },
 
         updateTotalWeightLifted: function () {
