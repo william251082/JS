@@ -1,43 +1,27 @@
 'use strict';
 
 (function (window, $) {
-    window.RepLogApp = {
-        initialize: function ($wrapper) {
-            this.$wrapper = $wrapper;
-            this.helper = new Helper($wrapper);
-            // var helper2 = new Helper($('.footer'));
-            // console.log(
-            //     this.helper.calculateTotalWeight(),
-            //     helper2.calculateTotalWeight()
-            // );
+    window.RepLogApp = function ($wrapper) {
+        this.$wrapper = $wrapper;
+        this.helper = new Helper($wrapper);
 
-            // console.log(
-            //     'foo'.__proto__,
-            //     [].__proto__,
-            //     (new Date()).__proto__
-            //     );
+        this.$wrapper.find('.js-delete-rep-log').on(
+            'click',
+            this.handleRepLogDelete.bind(this)
+        );
 
-            this.$wrapper.find('.js-delete-rep-log').on(
-                'click',
-                this.handleRepLogDelete.bind(this)
-            );
+        this.$wrapper.find('tbody tr').on(
+            'click',
+            this.handleRowClick.bind(this)
+        );
 
-            this.$wrapper.find('tbody tr').on(
-                'click',
-                this.handleRowClick.bind(this)
-            );
+        this.$wrapper.find('.js-new-rep-log-form').on(
+            'submit',
+            this.handleNewFormSubmit.bind(this)
+        );
+    };
 
-            // console.log(this.helper, Object.keys(this.helper));
-            // console.log(Helper, Object.keys(Helper));
-            // console.log(this.helper.calculateTotalWeight());
-
-            var playObject = {
-                lift: 'stuff'
-            };
-            playObject.__proto__.cat = 'meow';
-            // console.log(playObject.lift, playObject.cat);
-        },
-
+    $.extend(window.RepLogApp.prototype, {
         updateTotalWeightLifted: function () {
             this.$wrapper.find('js-total-weight').html(
                 this.helper.calculateTotalWeight()
@@ -71,10 +55,22 @@
             return false;
         },
 
+        handleNewFormSubmit: function(e) {
+            e.preventDefault();
+
+            console.log('submitting');
+            var $form = $(e.currentTarget);
+            $.ajax({
+                url: $form.attr('action'),
+                method: 'POST',
+                data: $form.serialize()
+            });
+        },
+
         handleRowClick: function () {
             console.log('row clicked');
         }
-    };
+    });
 
     /**
      * A private object
@@ -84,13 +80,16 @@
         this.$wrapper = $wrapper
     };
 
-    Helper.prototype.calculateTotalWeight = function () {
-        var totalWeight = 0;
-        this.$wrapper.find('tbody tr').each(function () {
-            totalWeight += $(this).data('weight');
-        });
+    $.extend(
+        Helper.prototype.calculateTotalWeight = function () {
+            var totalWeight = 0;
+            this.$wrapper.find('tbody tr').each(function () {
+                totalWeight += $(this).data('weight');
+            });
 
-        return totalWeight;
-    };
-})(window, jQuery);
+            return totalWeight;
+        }
+    );
+})
+(window, jQuery);
 
