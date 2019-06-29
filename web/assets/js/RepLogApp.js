@@ -15,7 +15,7 @@
             this.handleRowClick.bind(this)
         );
 
-        this.$wrapper.find('.js-new-rep-log-form').on(
+        this.$wrapper.find('.js-new-rep-log-form-wrapper').on(
             'submit',
             this.handleNewFormSubmit.bind(this)
         );
@@ -63,7 +63,14 @@
             $.ajax({
                 url: $form.attr('action'),
                 method: 'POST',
-                data: $form.serialize()
+                data: $form.serialize(),
+                success: function (data) {
+                    $form.closest('.js-new-rep-log-form-wrapper')
+                        .html(data)
+                },
+                error: function (jqXHR) {
+                    $form.closest('.js-new-rep-log-form-wrapper')
+                }
             });
         },
 
