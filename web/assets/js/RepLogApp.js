@@ -1,5 +1,7 @@
-(function () {
-    var RepLogApp = {
+'use strict';
+
+(function (window, $) {
+    window.RepLogApp = {
         initialize: function ($wrapper) {
             this.$wrapper = $wrapper;
 
@@ -21,7 +23,7 @@
         },
 
         whatIsThis: function (greeting) {
-            console.log(this, greeting);
+
         },
 
         updateTotalWeightLifted: function () {
@@ -79,5 +81,5 @@
             return totalWeight;
         }
     };
-})();
+})(window, jQuery);
 
