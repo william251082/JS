@@ -31,10 +31,10 @@
             newRepForm: '.js-new-rep-log-form'
         },
 
-        loadRepLogs: function() {
+        loadRepLogs: function () {
             var self = this;
             $.ajax({
-                url:Routing.generate('rep_log_list'),
+                url: Routing.generate('rep_log_list'),
                 success: function (data) {
                     $.each(data.items, function (key, repLog) {
                         self._addRow(repLog)
@@ -105,7 +105,10 @@
             }).then(function (data) {
                 console.log('another handler');
                 console.log(data);
-            })
+            }).catch(function (jqXHR) {
+                console.log('failed');
+                console.log(jqXHR.responseText);
+            });
         },
 
         _mapErrorsToForm: function (errorData) {
@@ -135,14 +138,14 @@
             $form.find('.form-group').removeClass('has-error');
         },
 
-        _clearForm: function() {
+        _clearForm: function () {
             this._removeFormErrors();
 
             var $form = this.$wrapper.find(this._selectors.newRepForm);
             $form[0].reset();
         },
 
-        _addRow: function(repLog) {
+        _addRow: function (repLog) {
             var tplText = $('#js-rep-log-row-template').html();
             var tpl = _.template(tplText);
 
