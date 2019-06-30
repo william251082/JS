@@ -1,12 +1,12 @@
 <form name="rep_log"
       method="post"
       class="form-inline js-new-rep-log-form"
-      novalidate="novalidate"
+      novalidate
       data-url="{{ path('rep_log_new') }}"
 >
     <div class="form-group">
         <label class="sr-only control-label required" for="rep_log_item">What did you lift?</label>
-        <select id="item" name="rep_log[item]" required="required" class="form-control">
+        <select id="rep_log_item" name="item" required="required" class="form-control">
             <option value="" selected="selected">What did you lift?</option>
             <option value="cat">Cat</option>
             <option value="fat_cat">Big Fat Cat</option>
@@ -23,7 +23,7 @@
                required="required"
                placeholder="How many times?"
                class="form-control"
-        >
+        />
     </div>
 
     <button type="submit" class="btn btn-primary">I Lifted it!</button>
