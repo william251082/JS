@@ -107,8 +107,8 @@
                         // finally done
                         resolve(data);
                     });
-                }).catch(function (jqXHR) {
-                    reject(jqXHR);
+                }).catch(function (errorData) {
+                    reject(errorData);
                 });
             });
         },
